@@ -1,0 +1,17 @@
+Asks user "hellow how are you"
+Asks user "Would you like to play worlde"
+if they answer no above repeats
+if they answer yes continue below
+import words from words.txt file
+ask user "How many letter would you like to have? Or would you like us to pick for you"
+if user says no
+    ask user to input the amount of letter they would like to have in the word
+elif user says yes
+    ask user would you like to pick the word or we give you the word
+    if user says yes
+        choose random word from words.txt
+ask user to input next word
+check if word is in words.txt 
+if yes output "well done you got the right word"
+if no output "you almost got the right word"
+repeat from line 13

@@ -1,0 +1,63 @@
+BEGIN 
+    words = [
+        "which",
+        "there",
+        "their",
+        "about",
+        "would",
+        "these",
+        "other",
+        "words",
+        "could",
+        "write",
+        "first",
+        "water"
+    ]
+
+    word = words random index
+
+    FUNCTION getInput(text):
+        WHILE True:
+            userInput = INPUT text
+            IF userInput == "":
+                SEND "Please enter a word that is 5 characers long" TO DISPLAY
+            ELSE
+                return userInput
+
+    FUNCTION calculateCorrect(word, guess):
+                check = []
+                i = 0;
+                FOR char in guess:
+                    // Check if current char is in the correct position
+                    IF char == wordToGuess index i:
+                        check index i = 2
+                
+                    // Check if current char is in the word
+                    ELSE IF char in wordToGuess:
+                        check index i = 1
+                    
+                    // Failed all checks, current char is not in the word
+                    ELSE:
+                        check index i = 0
+                    
+                    i = i + 1
+                return check
+
+    WHILE True
+        userInput = getInput("Please enter your guess")
+        checkedGuess = calculateCorrect(wordtoGuess, guess)
+        displayChecked = ""
+        i = 0
+        numCorrect = 0
+
+        FOR num in checkedGuess:
+            IF num == 2:
+                displayChecked = displayChecked + COLOR GREEN + guess index i
+                numCorrect = numCorrect + 1
+            ELSE IF num == 1:
+                displayChecked = displayChecked + COLOR YELLOW + guess index i
+            ELSE
+                displayChecked = displayChecked + COLOR GREY + guess index i
+        SEND displayChecked TO DISPLAY
+
+END

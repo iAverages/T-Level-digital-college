@@ -1,0 +1,3 @@
+The flowchart flow makes sense until the end. After the first input next word the flow gets confusing and it is not obvious what happens next. 
+
+Also there is a duplicate pathway for the words.txt, there is 2 paths which both lead to "well done you got the right word" and one leads to nothing else. This happens again with "you almost got the right word

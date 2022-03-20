@@ -1,0 +1,91 @@
+BEGIN
+
+    maxGuesses = 6
+    wordLengths = 5
+    words = READ "words.txt"
+    
+    FUNCTION getTotalLetters(word):
+        letterCount = {}
+        FOR char in word:
+            IF letterCount has char:
+                letterCount char = letterCount char + 1
+            ELSE
+                letterCount char = 1
+        return letterCount
+
+    // 0 = incorrect
+    // 1 = correct but wrong position
+    // 2 = correct in correct position
+    FUNCTION calculateCorrect(word, guess):
+        check = []
+        totalLetters = getTotalLetters(word)
+        foundLetters = {}
+        i = 0;
+        FOR char in guess:
+            // Count how many times we have found the current char
+            IF foundLetters has char:
+                foundLetters char = foundLetters char + 1
+            ELSE
+                foundLetters char = 1    
+        
+            // If we have seen the current curr more than the total number
+            // of times it appears in the word, mark as incorrect
+            IF foundLetters char > totalLetters char:
+                check index i = 0
+                
+            // Check if current char is in the correct position
+            ELSE IF char == wordToGuess index i:
+                check index i = 2
+        
+            // Check if current char is in the word
+            ELSE IF char in wordToGuess:
+                check index i = 1
+            
+            // Failed all checks, current char is not in the word
+            ELSE:
+                check index i = 0
+            
+            i = i + 1
+        return check
+
+    FUNCTION getInput(text):
+        WHILE True:
+            userInput = INPUT text
+            IF userInput == "" AND length userInput not equal wordLengths:
+                SEND "Please enter a word that is " + wordLengths " characers long" TO DISPLAY
+            ELSE
+                return userInput
+                
+    FUNCTION playGame(): 
+        wordToGuess = select random index from words
+        guesses = 0
+        WHILE guesses >= maxGuesses:
+            guess = getInput("What is your guess?")
+            checkedGuess = calculateCorrect(wordtoGuess, guess)
+
+            displayChecked = ""
+            numCorrect = 0
+
+            FOR num in checkedGuess:
+                IF num == 2:
+                    displayChecked = displayChecked + COLOR GREEN + guess index i
+                    numCorrect = numCorrect + 1
+                ELSE IF num == 1:
+                    displayChecked = displayChecked + COLOR YELLOW + guess index i
+                ELSE
+                    displayChecked = displayChecked + COLOR GREY + guess index i
+            SEND displayChecked TO DISPLAY
+
+            IF numCorrect == wordLengths:
+                SEND "You won!" TO DISPLAY
+                BREAK
+
+        WHILE True:
+            choie = INPUT "Want to play again?"
+            IF choice.lowercase() == "y"
+                playGame()
+            ELSE
+                SEND "Goodbye" TO DISPLAY
+
+    playGame() 
+END

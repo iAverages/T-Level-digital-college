@@ -1,0 +1,34 @@
+BEGIN
+
+    WHILE True
+        SEND "Hellow how are you?" TO DISPLAY
+        playWordle = INPUT "Would you like to play wordle"
+        IF playWordle == "yes"
+            BREAK
+    words = READ words.txt
+    wordToGuess = ""
+
+    choice = INPUT "How many letter would you like to have? Or would you like us to pick for you"
+
+    IF choice == "yes"
+        pickWord = INPUT "Would youl ike to pick the word or we give you the word"
+        IF pickWord == "yes"
+            word = select random word from words
+        ELSE 
+            word = INPUT "Input the next word"
+    ELSE
+        amountOfLetters = INPUT "Please input the amount of letter you would like to have in the word"
+        word = INPUT "Input the next word"
+        
+    IF word is in words:
+        SEND "Well done you got the right word" TO DISPLAY
+    ELSE 
+        SEND "You almost got the word right"
+    
+    WHILE True:
+        word = INPUT "Input the next word"
+        IF word is in words:
+            SEND "Well done you got the right word" TO DISPLAY
+        ELSE 
+            SEND "You almost got the word right"
+END
